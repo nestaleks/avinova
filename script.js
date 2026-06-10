@@ -92,6 +92,87 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   showSlide(0);
 });
 
+document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
+  const track = carousel.querySelector(".quotes");
+  const slides = [...carousel.querySelectorAll(".review-card")];
+  const previousButton = carousel.querySelector(".review-prev");
+  const nextButton = carousel.querySelector(".review-next");
+  const currentPosition = carousel.querySelector(".review-position strong");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let currentIndex = 0;
+  let isTransitioning = false;
+  let autoplayTimer;
+  let touchStartX = 0;
+
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone = slides[slides.length - 1].cloneNode(true);
+  firstClone.setAttribute("aria-hidden", "true");
+  lastClone.setAttribute("aria-hidden", "true");
+  track.append(firstClone);
+  track.prepend(lastClone);
+
+  const setTrackPosition = (animate = true) => {
+    track.style.transition = animate ? "" : "none";
+    track.style.transform = `translateX(-${(currentIndex + 1) * 100}%)`;
+    currentPosition.textContent = String((currentIndex + slides.length) % slides.length + 1);
+    if (!animate) {
+      track.getBoundingClientRect();
+      track.style.transition = "";
+    }
+  };
+
+  const showReview = (index) => {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    currentIndex = index;
+    setTrackPosition();
+  };
+
+  const stopAutoplay = () => window.clearInterval(autoplayTimer);
+  const startAutoplay = () => {
+    stopAutoplay();
+    if (!reduceMotion && !document.hidden) {
+      autoplayTimer = window.setInterval(() => showReview(currentIndex + 1), 12000);
+    }
+  };
+  const changeReview = (step) => {
+    showReview(currentIndex + step);
+    startAutoplay();
+  };
+
+  previousButton.addEventListener("click", () => changeReview(-1));
+  nextButton.addEventListener("click", () => changeReview(1));
+  carousel.addEventListener("mouseenter", stopAutoplay);
+  carousel.addEventListener("mouseleave", startAutoplay);
+  carousel.addEventListener("focusin", stopAutoplay);
+  carousel.addEventListener("focusout", (event) => {
+    if (!carousel.contains(event.relatedTarget)) startAutoplay();
+  });
+  carousel.addEventListener("touchstart", (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+    stopAutoplay();
+  }, { passive: true });
+  carousel.addEventListener("touchend", (event) => {
+    const distance = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(distance) > 45) showReview(currentIndex + (distance < 0 ? 1 : -1));
+    startAutoplay();
+  }, { passive: true });
+  track.addEventListener("transitionend", () => {
+    isTransitioning = false;
+    if (currentIndex === slides.length) {
+      currentIndex = 0;
+      setTrackPosition(false);
+    } else if (currentIndex === -1) {
+      currentIndex = slides.length - 1;
+      setTrackPosition(false);
+    }
+  });
+  document.addEventListener("visibilitychange", startAutoplay);
+
+  setTrackPosition(false);
+  startAutoplay();
+});
+
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {

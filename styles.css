@@ -125,11 +125,19 @@ button { color: inherit; }
 .compact-rating strong { font-family: var(--display); font-size: 35px; font-weight: 400; }
 .compact-rating span, .stars { color: var(--gold-dark); letter-spacing: .15em; font-size: 11px; }
 .compact-rating small { display: block; color: #586270; letter-spacing: 0; margin-top: 1px; font-size: 9px; }
-.quotes { display: grid; gap: 0; border-top: 1px solid var(--line); }
-blockquote { margin: 0; padding: 16px 0 16px 54px; background: transparent; border-bottom: 1px solid var(--line); position: relative; }
-blockquote::before { content: "◯"; position: absolute; left: 7px; top: 24px; font-family: var(--display); font-size: 26px; color: var(--ink); }
-blockquote p { font-family: var(--display); font-size: 14px; line-height: 1.35; margin: 4px 0; }
-blockquote footer { font-size: 8px; color: #66707c; text-transform: uppercase; letter-spacing: .08em; }
+.review-carousel { border-top: 1px solid var(--line); }
+.review-viewport { overflow: hidden; }
+.quotes { display: flex; transition: transform .55s ease; }
+.review-card { flex: 0 0 100%; min-width: 0; margin: 0; padding: 25px 0; display: grid; grid-template-columns: 92px 1fr; gap: 22px; align-items: center; background: transparent; border-bottom: 1px solid var(--line); }
+.review-card img { width: 92px; height: 92px; border-radius: 50%; object-fit: cover; }
+.review-content { min-width: 0; }
+.review-card p { font-family: var(--display); font-size: 16px; line-height: 1.42; margin: 7px 0 12px; }
+.review-card footer { font-size: 8px; color: #66707c; text-transform: uppercase; letter-spacing: .08em; }
+.review-controls { display: flex; justify-content: flex-end; align-items: center; gap: 13px; padding-top: 16px; }
+.review-arrow { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); font-size: 16px; cursor: pointer; transition: color .2s, background .2s; }
+.review-arrow:hover, .review-arrow:focus-visible { color: white; background: var(--ink); }
+.review-position { min-width: 48px; color: #66707c; font-size: 10px; text-align: center; letter-spacing: .08em; }
+.review-position strong { color: var(--ink); font-weight: 600; }
 
 .faq-list { border-top: 1px solid var(--line); }
 .faq-item { border-bottom: 1px solid var(--line); }
@@ -162,7 +170,8 @@ blockquote footer { font-size: 8px; color: #66707c; text-transform: uppercase; l
 .footer-main h3 { color: #cf9d59; text-transform: uppercase; letter-spacing: .12em; font-size: 10px; }
 .footer-main p, .footer-main a { display: block; color: #aab5c4; font-size: 12px; margin: 7px 0; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.13); padding-block: 22px; display: flex; justify-content: space-between; color: #7e8b9e; font-size: 13px; }
-.footer-bottom a { padding: 0 15px; }
+.footer-bottom > span:last-child { display: flex; flex-wrap: wrap; justify-content: flex-end; margin-inline: -15px; row-gap: 10px; }
+.footer-bottom a { padding: 0 15px; white-space: nowrap; }
 
 .reveal { opacity: 1; transform: translateY(22px); transition: transform .7s ease; }
 .reveal.visible { transform: none; }
@@ -287,11 +296,16 @@ blockquote footer { font-size: 8px; color: #66707c; text-transform: uppercase; l
   .review-faq-grid { gap: 0; }
   .review-panel { border-right: 0; border-bottom: 1px solid var(--line); }
   .review-panel, .faq-panel { padding: 34px 24px; }
+  .review-card { grid-template-columns: 74px 1fr; gap: 16px; }
+  .review-card img { width: 74px; height: 74px; }
+  .review-card p { font-size: 14px; }
   .contact-form { padding: 24px 20px; grid-template-columns: 1fr; }
   .contact-form .full { grid-column: auto; }
   .footer-main { grid-template-columns: 1fr; gap: 30px; }
   .footer-main > div:first-child { grid-column: auto; }
-  .footer-bottom { flex-direction: column; gap: 8px; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+  .footer-bottom > span:last-child { width: 100%; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-inline: 0; }
+  .footer-bottom a { white-space: normal; }
   .product-hero { min-height: 780px; background: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.98) 38%,rgba(255,255,255,.15) 65%),url("assets/avinova-hero.png") 65% top/auto 500px no-repeat; }
   .model-s3 .product-hero { background-image: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.98) 38%,rgba(255,255,255,.15) 65%),url("assets/avinova-s3.png"); background-position: center, 65% top; background-size: auto, auto 500px; }
   .product-hero-copy { width: calc(100% - 32px); padding: 28px 0 55px; }
