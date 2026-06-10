@@ -43,19 +43,24 @@ avinova/
 ├── assets/
 │   └── avinova-hero.png  # Основное изображение продукта
 ├── index.html             # Главная страница
-├── s1.html                # Страница модели AVINOVA S1
-├── s2.html                # Страница модели AVINOVA S2
+├── pages/
+│   ├── model1.html        # Страница модели AVINOVA S1
+│   ├── model2.html        # Страница модели AVINOVA S2
+│   ├── model3.html        # Страница модели AVINOVA S3
+│   ├── impressum.html
+│   ├── datenschutz.html
+│   └── agb.html
 ├── styles.css             # Стили и адаптивная верстка
 ├── script.js              # Навигация, FAQ, форма и анимации
-├── product.js             # Данные и отображение моделей
 └── README.md
 ```
 
 ## Страницы
 
 - `index.html` — презентация бренда, моделей, функций, отзывов и FAQ;
-- `s1.html` — характеристики базовой модели S1 Essential;
-- `s2.html` — характеристики модели S2 Comfort.
+- `pages/model1.html` — характеристики базовой модели S1 Essential;
+- `pages/model2.html` — характеристики модели S2 Comfort;
+- `pages/model3.html` — характеристики премиальной модели S3.
 
 ## Примечание
 

@@ -18,7 +18,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--body); line-height: 1.55; }
+body { margin: 0; overflow-x: hidden; color: var(--ink); background: var(--white); font-family: var(--body); line-height: 1.55; }
 body.menu-open { overflow: hidden; }
 body::after { content: none; }
 img { max-width: 100%; display: block; }
@@ -41,15 +41,14 @@ button { color: inherit; }
 .header-cta:active { background-color: var(--gold-dark); transform: translateY(0); box-shadow: none; }
 .menu-toggle, .mobile-nav { display: none; }
 
-.hero { min-height: calc(100svh - 76px); position: relative; display: grid; align-items: center; overflow: hidden; background: #d9d0c5; }
-.hero-media { position: absolute; inset: 0; background-image: linear-gradient(90deg, rgba(246,243,238,.96) 0%, rgba(246,243,238,.82) 33%, rgba(246,243,238,0) 60%), url("assets/avinova-hero.png"); background-position: center, center; background-size: auto, cover; background-repeat: no-repeat; animation: hero-in 1.2s ease both; }
-.hero-media::after { content: none; }
-.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 70%, rgba(9,22,41,.16)); }
-.hero-copy { position: relative; z-index: 2; width: min(620px, 52vw); margin-left: max(24px, calc((100vw - 1180px)/2)); padding-block: 80px; }
+.hero { min-height: 585px; display: flex; align-items: center; overflow: hidden; background: linear-gradient(90deg, rgba(251,250,248,.98) 0%, rgba(251,250,248,.94) 40%, rgba(251,250,248,.25) 62%, rgba(251,250,248,0) 72%), url("assets/avinova-hero.png") 68% center/cover no-repeat; }
+.hero-copy { width: min(1180px, calc(100% - 48px)); margin-inline: auto; padding: 54px 0 60px; }
+.hero-brand { display: inline-block; font-size: 46px; line-height: 1; }
 .hero h1, h2, .product-title { font-family: var(--display); font-weight: 400; letter-spacing: -.035em; }
-.hero h1 { font-size: clamp(48px, 4.5vw, 82px); line-height: .98; margin: 0 0 26px; max-width: 720px; font-weight: 700; }
-.lead { font-size: clamp(16px, 1.6vw, 20px); color: var(--ink-soft); max-width: 550px; }
-.button-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.hero h1 { margin: 25px 0 18px; font-size: 42px; line-height: 1.15; font-weight: 700; }
+.hero-lead { color: #3d4652; font-size: 16px; line-height: 1.55; }
+.hero-lead strong { color: var(--ink); }
+.button-row { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 25px; }
 .button { display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; min-height: 48px; padding: 0 26px; text-transform: uppercase; letter-spacing: .08em; font-size: 11px; font-weight: 800; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s, border-color .2s, color .2s; border-radius: 2px; }
 .button:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(10,27,52,.16); }
 .button:active { transform: translateY(0); box-shadow: none; }
@@ -59,17 +58,12 @@ button { color: inherit; }
 .button-light { background: rgba(255,255,255,.56); border-color: var(--ink); backdrop-filter: blur(8px); }
 .button-light:hover { background-color: var(--ink); border-color: var(--ink); color: white; }
 .button-light:active { background-color: var(--gold-dark); border-color: var(--gold-dark); color: white; }
+.button-outline { border: 2px solid var(--ink); background: rgba(255,255,255,.55); }
+.button-outline:hover { color: white; background: var(--ink); }
 .button-gold { color: white; background: var(--gold); }
 .button-gold:hover { background-color: var(--ink); color: white; }
 .button-gold:active { background-color: var(--gold-dark); color: white; }
 .button-full { width: 100%; }
-.hero-note { position: absolute; z-index: 3; right: 4vw; bottom: 5vh; display: grid; grid-template-columns: auto auto; gap: 0 10px; align-items: center; color: white; text-shadow: 0 1px 8px rgba(0,0,0,.3); }
-.hero-note .pulse { grid-row: 1/3; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; position: relative; }
-.hero-note .pulse::after { content: ""; position: absolute; inset: 14px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 20px var(--blue); }
-.hero-note strong { letter-spacing: .08em; font-size: 12px; }
-.hero-note small { opacity: .8; }
-@keyframes hero-in { from { scale: 1.04; filter: blur(4px); } to { scale: 1; filter: blur(0); } }
-
 .benefits { margin-top: -26px; position: relative; z-index: 5; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 32px 18px; overflow: hidden; }
 .benefits article { position: relative; min-width: 0; min-height: 150px; padding: 10px 20px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; }
 .benefits article:not(:last-child)::after { content: ""; position: absolute; top: 8px; right: 0; bottom: 8px; width: 1px; background: var(--line); }
@@ -80,8 +74,12 @@ button { color: inherit; }
 .section-heading { text-align: center; margin: 0 auto 52px; max-width: 720px; }
 .section-heading h2, .contact-copy h2 { font-size: clamp(38px, 4.5vw, 60px); line-height: 1.04; margin: 0 0 14px; }
 .section-heading > p:last-child { color: #68717d; }
-.model-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 430px)); justify-content: center; gap: 20px; align-items: stretch; }
+.model-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); justify-content: center; gap: 20px; align-items: stretch; }
 .model-card { background: white; border: 1px solid var(--line); padding: 24px; border-radius: 4px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+.model-card-link { color: inherit; transition: transform .25s, box-shadow .25s, border-color .25s; }
+.model-card-link:hover { transform: translateY(-5px); border-color: rgba(201,149,77,.45); box-shadow: var(--shadow); }
+.model-card-link.featured:hover { transform: translateY(-19px); }
+.model-card-link:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 .model-card.featured { transform: translateY(-14px); box-shadow: var(--shadow); border-color: rgba(201,149,77,.45); }
 .best-label { position: absolute; right: 0; top: 0; padding: 8px 16px; background: var(--gold); color: white; font-size: 9px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
 .model-index { font-family: var(--display); color: #c8c2b9; font-size: 25px; }
@@ -90,6 +88,7 @@ button { color: inherit; }
 .model-card:hover .product-visual img { transform: scale(1.035); }
 .visual-s1 img { object-position: 74% 56%; }
 .visual-s2 img { object-position: 78% 51%; filter: saturate(.75) contrast(1.03); }
+.visual-s3 img { object-position: 76% 53%; filter: saturate(.72) contrast(1.04); }
 .model-kicker { margin: 0; color: var(--gold-dark); text-transform: uppercase; letter-spacing: .14em; font-size: 9px; font-weight: 800; }
 .model-card h3 { font-family: var(--display); font-size: 31px; font-weight: 400; margin: 4px 0; }
 .model-intro { color: #66707c; margin: 0 0 18px; font-size: 13px; }
@@ -99,30 +98,27 @@ button { color: inherit; }
 .price { font-family: var(--display); font-size: 30px; margin-bottom: 16px; }
 .price span { font-family: var(--body); color: #777f89; font-size: 11px; }
 
-.feature-section { background: var(--ink); color: white; overflow: hidden; }
-.section-heading.light p { color: #c8d0da; }
-.feature-grid { display: grid; grid-template-columns: 1fr 1.15fr 1fr; grid-template-rows: auto auto; gap: 14px; }
-.feature-card { min-height: 285px; padding: 34px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.045); position: relative; overflow: hidden; }
-.feature-card > span { color: var(--gold); font-family: var(--display); font-size: 20px; }
-.feature-card h3 { font-family: var(--display); font-size: 28px; font-weight: 400; margin: 12px 0; }
-.feature-card p, .feature-card li { color: #bdc6d1; font-size: 13px; }
-.feature-card ul { list-style: none; padding: 0; }
-.feature-card li { padding: 4px 0; }
-.feature-card li::before { content: "—"; color: var(--gold); margin-right: 9px; }
-.image-card { grid-row: 1/3; grid-column: 2; background: linear-gradient(180deg, transparent 40%, rgba(9,22,41,.9)), url("assets/avinova-hero.png") 72% center/cover; display: flex; align-items: end; }
-.image-card h3 { font-size: 45px; margin-top: 0; }
-.image-card p { color: white; margin: 0; text-transform: uppercase; letter-spacing: .16em; font-size: 10px; }
+.feature-section { padding-top: 65px; background: #f5f4f1; }
+.feature-section .section-heading h2,
+.audience-section .section-heading h2 { font-size: 22px; text-transform: uppercase; letter-spacing: .08em; }
+.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.feature-card { padding: 20px; background: white; border: 1px solid var(--line); border-radius: 7px; }
+.feature-card h3 { margin: 0 0 13px; font-family: var(--body); font-size: 16px; font-weight: 700; }
+.feature-body { display: grid; grid-template-columns: 120px 1fr; gap: 15px; align-items: center; }
+.feature-card ul { list-style: none; margin: 0; padding: 0; font-size: 11px; line-height: 1.65; }
+.feature-card li { position: relative; padding-left: 20px; }
+.feature-card li::before { content: "✓"; position: absolute; left: 0; font-weight: 800; }
+.nozzle-art { width: 116px; height: 116px; border-radius: 50%; background: radial-gradient(circle at 70% 30%,rgba(126,206,231,.7),transparent 28%),linear-gradient(135deg,#d8e9ee,#fff 46%,#9faab1 48%,#f7f7f6 56%,#b7e7f1); }
+.feature-photo img { width: 120px; height: 116px; object-fit: cover; border-radius: 0 50% 50% 0; }
 
-.audience-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
-.audience-card { background: white; padding: 12px 12px 25px; position: relative; border: 1px solid var(--line); text-align: center; }
-.audience-number { position: absolute; z-index: 2; top: 24px; left: 24px; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: white; font-size: 10px; }
-.audience-art { height: 220px; background-image: linear-gradient(145deg, rgba(201,149,77,.2), rgba(10,27,52,.05)), url("assets/avinova-hero.png"); background-size: cover; filter: saturate(.55); }
-.audience-art.family { background-position: 30% 48%; }
-.audience-art.seniors { background-position: 55% 44%; }
-.audience-art.sensitive { background-position: 70% 40%; }
-.audience-art.design { background-position: 90% 60%; }
-.audience-card h3 { font-family: var(--display); font-size: 23px; font-weight: 400; margin: 20px 0 5px; }
-.audience-card p { color: #68717d; font-size: 12px; margin: 0 12px; }
+.audience-section { padding-top: 75px; background: white; }
+.audience-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+.audience-grid article { text-align: center; }
+.audience-photo { position: relative; }
+.audience-photo img { width: 100%; height: 220px; object-fit: cover; border-radius: 7px 7px 0 0; }
+.audience-photo span { position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%); width: 45px; height: 45px; display: grid; place-items: center; color: white; background: var(--ink); border: 3px solid white; border-radius: 50%; font-size: 25px; }
+.audience-section h3 { margin: 28px 0 5px; font-size: 14px; }
+.audience-section p { margin: 0 auto; max-width: 230px; color: #414a56; font-size: 10px; line-height: 1.5; }
 
 .review-faq-section { background: #e8e2d9; }
 .review-faq-grid { display: grid; grid-template-columns: 1fr 1fr; background: rgba(255,255,255,.52); border: 1px solid rgba(10,27,52,.08); }
@@ -176,20 +172,26 @@ blockquote footer { font-size: 8px; color: #66707c; text-transform: uppercase; l
 .reveal.visible { transform: none; }
 
 /* Product pages */
-.product-hero { min-height: 720px; display: grid; grid-template-columns: .85fr 1.15fr; background: #ebe5dc; }
-.product-hero-copy { padding: 100px max(40px, calc((100vw - 1180px)/2)); padding-right: 50px; display: flex; flex-direction: column; justify-content: center; }
-.product-title { font-size: clamp(64px, 8vw, 112px); line-height: .9; margin: 0 0 20px; }
-.product-tagline { font-family: var(--display); font-size: 25px; max-width: 470px; }
-.product-hero-media { background: url("assets/avinova-hero.png") 72% center/cover; min-height: 580px; position: relative; }
-.product-hero-media::after { content: attr(data-label); position: absolute; left: 30px; bottom: 25px; color: white; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; }
+.inner-page { background: white; }
+.model-s1 { --gold: #8aa4ac; }
+.model-s2 { --gold: #c9954d; }
+.model-s3 { --gold: #8f969d; }
+.back-button { min-height: 42px; padding-inline: 20px; }
+.product-hero { min-height: 585px; display: flex; align-items: stretch; background: linear-gradient(90deg, rgba(251,250,248,.98) 0%, rgba(251,250,248,.94) 40%, rgba(251,250,248,.25) 62%, rgba(251,250,248,0) 72%), url("assets/avinova-hero.png") 68% center/cover no-repeat; }
+.product-hero-copy { width: min(1180px, calc(100% - 48px)); margin-inline: auto; padding: 54px 0 70px; display: flex; flex-direction: column; align-items: flex-start; }
+.product-hero-brand { display: inline-block; font-size: 46px; line-height: 1; }
+.product-hero .back-button { margin-top: 24px; }
+.product-title { margin: auto 0 0; max-width: 560px; font-size: clamp(64px, 8vw, 112px); line-height: .9; }
 .spec-strip { background: var(--ink); color: white; }
-.spec-strip-inner { display: grid; grid-template-columns: repeat(4,1fr); padding: 28px 0; }
-.spec-strip div { padding: 0 25px; border-right: 1px solid rgba(255,255,255,.15); }
+.spec-strip-inner { display: grid; grid-template-columns: repeat(4,1fr); padding: 56px 0; }
+.spec-strip div { padding: 15px; border-right: 1px solid rgba(255,255,255,.15); }
 .spec-strip div:last-child { border: 0; }
 .spec-strip small { display: block; color: #8f9aab; text-transform: uppercase; letter-spacing: .1em; }
 .spec-strip strong { font-family: var(--display); font-size: 20px; font-weight: 400; }
 .product-story { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .product-story-image { min-height: 560px; background: url("assets/avinova-hero.png") 84% center/cover; }
+.model-s3 .product-hero { background-image: linear-gradient(90deg, rgba(251,250,248,.98) 0%, rgba(251,250,248,.94) 40%, rgba(251,250,248,.25) 62%, rgba(251,250,248,0) 72%), url("assets/avinova-s3.png"); background-position: center, 68% center; background-size: auto, cover; background-repeat: no-repeat; }
+.model-s3 .product-story-image { background-image: url("assets/avinova-s3.png"); background-position: 78% center; }
 .product-story-copy h2 { font-size: clamp(40px,5vw,65px); margin: 0 0 20px; }
 .product-story-copy > p { color: #647080; }
 .product-feature-list { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -199,6 +201,19 @@ blockquote footer { font-size: 8px; color: #66707c; text-transform: uppercase; l
 .product-buy { background: #e7e1d8; text-align: center; padding: 90px 20px; }
 .product-buy h2 { font-size: clamp(38px,5vw,62px); margin: 0 0 8px; }
 .product-buy .price { font-size: 45px; margin: 20px 0; }
+
+/* Legal pages */
+.legal-body { background: #f5f4f1; }
+.legal-page { padding: 20px 0 90px; }
+.legal-card { max-width: 920px; padding: clamp(32px, 5vw, 70px); background: white; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.legal-card h1 { margin: 0 0 42px; font-family: var(--display); font-size: clamp(44px, 7vw, 76px); font-weight: 400; letter-spacing: -.04em; }
+.legal-card > p { color: #4f5966; }
+.legal-block { padding: 24px 0; border-top: 1px solid var(--line); }
+.legal-block:first-of-type { border-top: 0; padding-top: 0; }
+.legal-label { display: block; margin-bottom: 8px; color: var(--gold-dark); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.legal-block p { margin: 6px 0; color: #4f5966; font-size: 14px; }
+.legal-block a { text-decoration: underline; text-decoration-color: rgba(10,27,52,.3); text-underline-offset: 3px; }
+.legal-footer { margin-top: 0; }
 
 @media (max-width: 980px) {
   .benefits { grid-template-columns: repeat(6, minmax(0, 1fr)); padding: 22px 18px; }
@@ -216,6 +231,9 @@ blockquote footer { font-size: 8px; color: #66707c; text-transform: uppercase; l
   .model-grid { gap: 10px; }
   .model-card { padding: 18px; }
   .product-visual { margin-inline: -18px; height: 220px; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .feature-body { grid-template-columns: 150px 1fr; }
+  .feature-photo img { width: 150px; }
   .audience-grid { grid-template-columns: 1fr 1fr; }
   .contact-grid { gap: 45px; }
   .footer-main { grid-template-columns: 2fr 1fr 1fr; }
@@ -244,23 +262,20 @@ blockquote footer { font-size: 8px; color: #66707c; text-transform: uppercase; l
   .mobile-nav > a:first-child { border-top: 1px solid var(--line); }
   .mobile-actions { margin-top: auto; display: grid; gap: 12px; padding-top: 28px; }
   .mobile-actions .button { width: 100%; min-height: 50px; font-family: var(--body); }
-  .hero { min-height: max(700px, calc(100svh - 68px)); align-items: end; }
-  .hero-media { background-image: linear-gradient(0deg, rgba(244,240,234,1) 0%, rgba(244,240,234,.98) 20%, rgba(244,240,234,.82) 42%, rgba(244,240,234,.46) 62%, rgba(244,240,234,.14) 78%, rgba(244,240,234,0) 92%), url("assets/avinova-hero.png"); background-position: center, right 0 top 0; background-size: auto, min(160vw, 900px) auto; }
-  .hero-media::after { content: ""; position: absolute; left: 0; right: 0; top: min(94vw, 560px); height: 150px; background: linear-gradient(180deg, rgba(244,240,234,0), rgba(244,240,234,.74) 38%, rgba(244,240,234,.98) 72%, rgba(244,240,234,1)); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); pointer-events: none; }
-  .hero-copy { width: auto; margin: 0 22px; padding: clamp(390px, 59vw, 455px) 0 50px; }
-  .hero h1 { font-size: clamp(43px, 8.1vw, 62px); }
-  .lead { font-size: 15px; }
+  .hero { min-height: 780px; align-items: stretch; background: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.98) 38%,rgba(255,255,255,.15) 65%),url("assets/avinova-hero.png") 65% top/auto 480px no-repeat; }
+  .hero-copy { width: calc(100% - 32px); padding: 28px 0 55px; }
+  .hero-brand { font-size: 30px; }
+  .hero h1 { margin-top: 430px; }
+  .hero h1 { font-size: clamp(34px, 8.1vw, 48px); }
+  .hero-lead { font-size: 15px; }
   .button-row .button { flex: 1; min-width: 155px; padding-inline: 12px; }
-  .hero-note { display: none; }
   .benefits { width: calc(100% - 32px); margin-top: 0; }
   .section-heading { margin-bottom: 35px; }
   .section-heading h2, .contact-copy h2 { font-size: 42px; }
   .model-grid { grid-template-columns: 1fr; gap: 18px; }
   .model-card.featured { transform: none; order: -1; }
   .product-visual { height: 260px; }
-  .feature-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-  .image-card { grid-column: auto; grid-row: auto; min-height: 420px; order: -1; }
-  .audience-art { height: 180px; }
+  .audience-photo img { height: 200px; }
   .review-faq-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .review-faq-grid { gap: 0; }
   .review-panel { border-right: 0; border-bottom: 1px solid var(--line); }
@@ -270,30 +285,46 @@ blockquote footer { font-size: 8px; color: #66707c; text-transform: uppercase; l
   .footer-main { grid-template-columns: 1fr 1fr; gap: 30px; }
   .footer-main > div:first-child { grid-column: 1/-1; }
   .footer-bottom { flex-direction: column; gap: 8px; }
-  .product-hero { grid-template-columns: 1fr; }
-  .product-hero-copy { padding: 80px 24px 50px; }
-  .product-hero-media { min-height: 470px; order: -1; }
+  .product-hero { min-height: 780px; background: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.98) 38%,rgba(255,255,255,.15) 65%),url("assets/avinova-hero.png") 65% top/auto 500px no-repeat; }
+  .model-s3 .product-hero { background-image: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.98) 38%,rgba(255,255,255,.15) 65%),url("assets/avinova-s3.png"); background-position: center, 65% top; background-size: auto, auto 500px; }
+  .product-hero-copy { width: calc(100% - 32px); padding: 28px 0 55px; }
+  .product-hero-brand { font-size: 30px; }
+  .product-title { margin-top: 430px; }
   .spec-strip-inner { grid-template-columns: 1fr 1fr; gap: 24px 0; }
-  .spec-strip div:nth-child(2) { border: 0; }
+  .spec-strip div:nth-child(2),
+  .spec-strip div:nth-child(4) { border: 0; }
   .product-story { grid-template-columns: 1fr; gap: 35px; }
   .product-story-image { min-height: 440px; }
+  .legal-page { padding-top: 0; }
+  .legal-card { padding: 30px 22px; }
 }
 
 @media (max-width: 430px) {
   .section-shell { width: calc(100% - 28px); }
-  .hero { min-height: 700px; }
-  .hero-media { background-position: center, right 0 top 0; background-size: auto, min(170vw, 720px) auto; }
-  .hero-copy { padding-top: 390px; }
-  .hero h1 { font-size: 43px; }
+  .hero { min-height: 780px; }
+  .hero-copy { padding-top: 28px; }
+  .hero h1 { margin-top: 430px; }
+  .hero h1 { font-size: 34px; }
   .button-row { display: grid; }
   .benefits { width: calc(100% - 28px); }
   .audience-grid { grid-template-columns: 1fr; }
-  .audience-art { height: 230px; }
+  .audience-photo img { height: 230px; }
   .contact-form { margin-inline: -5px; }
   .product-feature-list { grid-template-columns: 1fr; }
+  .product-title { font-size: clamp(52px, 16vw, 76px); }
+  .product-buy .button { width: min(100%, 340px); }
 }
 
 @media (max-width: 600px) {
+  .hero .button-row { display: grid; grid-template-columns: 1fr; }
+  .hero .button { width: 100%; min-width: 0; }
+  .product-title { font-size: clamp(48px, 13vw, 66px); }
+  .product-buy .button { width: min(100%, 340px); }
+  .feature-section .section-heading h2,
+  .audience-section .section-heading h2 { font-size: 19px; overflow-wrap: anywhere; }
+  .feature-body { grid-template-columns: 105px minmax(0, 1fr); gap: 12px; }
+  .feature-photo img { width: 105px; height: 105px; }
+  .nozzle-art { width: 105px; height: 105px; }
   .benefits { display: block; padding: 12px 20px; }
   .benefits article { min-height: 0; padding: 24px 12px; }
   .benefits article:nth-child(n) { grid-column: auto; }

@@ -10,45 +10,16 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="AVINOVA Startseite">AVINOVA<span>®</span></a>
-    <nav class="desktop-nav" aria-label="Hauptnavigation">
-      <a href="#modelle">Modelle</a>
-      <a href="#funktionen">Funktionen</a>
-      <a href="#erfahrungen">Erfahrungen</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a class="header-cta" href="#kontakt">Beratung</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
-      <span></span><span></span><span></span><span class="sr-only">Menü öffnen</span>
-    </button>
-    <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile Navigation">
-      <a href="#modelle">Modelle</a>
-      <a href="#funktionen">Funktionen</a>
-      <a href="#erfahrungen">Erfahrungen</a>
-      <a href="#faq">FAQ</a>
-      <div class="mobile-actions">
-        <a class="button button-dark" href="#modelle">Jetzt entdecken</a>
-        <a class="button button-gold" href="#kontakt">Beratung anfragen</a>
-      </div>
-    </nav>
-  </header>
-
   <main>
     <section class="hero">
-      <div class="hero-media" aria-hidden="true"></div>
       <div class="hero-copy reveal">
-        <h1>Das Dusch-WC für eine neue Generation von Hygiene.</h1>
-        <p class="lead">Spürbar frischer, sanfter und komfortabler. Eine neue tägliche Routine, die sich ganz natürlich anfühlt.</p>
+        <a class="brand hero-brand" href="index.html" aria-label="AVINOVA Startseite">AVINOVA<span>®</span></a>
+        <h1>Das Dusch-WC für<br>eine neue Generation<br>von Hygiene</h1>
+        <p class="hero-lead"><strong>Mehr Frische. Mehr Komfort. Mehr Wohlbefinden.</strong><br>Erlebe tägliche Reinigung mit Wasser –<br>sanft, hygienisch und luxuriös.</p>
         <div class="button-row">
           <a class="button button-dark" href="#modelle">Jetzt entdecken</a>
-          <a class="button button-light" href="#kontakt">Beratung anfragen</a>
+          <a class="button button-outline" href="#kontakt">Beratung anfragen</a>
         </div>
-      </div>
-      <div class="hero-note">
-        <span class="pulse"></span>
-        <strong>Pure Sense</strong>
-        <small>Intuitive Hygiene</small>
       </div>
     </section>
 
@@ -67,7 +38,7 @@
         <p>Vom klaren Einstieg bis zur vollendeten Wellness-Lösung.</p>
       </div>
       <div class="model-grid">
-        <article class="model-card reveal">
+        <a class="model-card model-card-link reveal" href="pages/model1.html" aria-label="AVINOVA S1 entdecken">
           <div class="model-index">01</div>
           <div class="product-visual visual-s1"><img src="assets/avinova-hero.png" alt="AVINOVA S1 Dusch-WC"></div>
           <p class="model-kicker">Essential</p>
@@ -80,9 +51,9 @@
             <li>Selbstreinigende Düse</li>
           </ul>
           <div class="price"><span>ab</span> 999 €</div>
-          <a class="button button-dark button-full" href="s1.html">S1 entdecken</a>
-        </article>
-        <article class="model-card featured reveal">
+          <span class="button button-dark button-full">S1 entdecken</span>
+        </a>
+        <a class="model-card model-card-link featured reveal" href="pages/model2.html" aria-label="AVINOVA S2 entdecken">
           <div class="best-label">Meistgewählt</div>
           <div class="model-index">02</div>
           <div class="product-visual visual-s2"><img src="assets/avinova-hero.png" alt="AVINOVA S2 Dusch-WC"></div>
@@ -96,34 +67,60 @@
             <li>Nachtlicht & Soft-Close</li>
           </ul>
           <div class="price"><span>ab</span> 1.499 €</div>
-          <a class="button button-gold button-full" href="s2.html">S2 entdecken</a>
-        </article>
+          <span class="button button-gold button-full">S2 entdecken</span>
+        </a>
+        <a class="model-card model-card-link reveal" href="pages/model3.html" aria-label="AVINOVA S3 entdecken">
+          <div class="model-index">03</div>
+          <div class="product-visual visual-s3"><img src="assets/avinova-s3.png" alt="AVINOVA S3 Dusch-WC"></div>
+          <p class="model-kicker">Premium</p>
+          <h3>AVINOVA S3</h3>
+          <p class="model-intro">Das Premium-Erlebnis ohne Kompromisse.</p>
+          <ul class="check-list">
+            <li>Alle Funktionen des S2</li>
+            <li>Automatische Spülung</li>
+            <li>App-Steuerung</li>
+            <li>Benutzererkennung & LED-Display</li>
+          </ul>
+          <div class="price"><span>ab</span> 1.999 €</div>
+          <span class="button button-dark button-full">S3 entdecken</span>
+        </a>
       </div>
     </section>
 
     <section class="feature-section section" id="funktionen">
-      <div class="section-shell">
-        <div class="section-heading light reveal">
-          <h2>Die wichtigsten Funktionen</h2>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-card reveal"><span>01</span><h3>Intelligente Reinigung</h3><p>Eine präzise, oszillierende Düse mit persönlicher Wasserstärke und Temperatur.</p><ul><li>Lady-Wash</li><li>Massage-Modus</li><li>Automatische Spülung</li></ul></article>
-          <article class="feature-card image-card reveal"><div><p>Ihr persönliches</p><h3>Wohlfühlprofil.</h3></div></article>
-          <article class="feature-card reveal"><span>02</span><h3>Komfort auf Knopfdruck</h3><p>Alles, was eine ruhige Routine noch angenehmer macht.</p><ul><li>Sitzheizung</li><li>Warmluft</li><li>Geruchsfilter</li></ul></article>
-          <article class="feature-card reveal"><span>03</span><h3>Reduziertes Design</h3><p>Nahtlose Keramik, versteckte Anschlüsse und eine Silhouette, die sich einfügt.</p><ul><li>Soft-Close</li><li>Easy-Clean Glasur</li><li>Ambientelicht</li></ul></article>
-        </div>
+      <div class="section-heading reveal"><h2>Die wichtigsten Funktionen</h2></div>
+      <div class="feature-grid section-shell">
+        <article class="feature-card reveal">
+          <h3>Intelligente Reinigung</h3>
+          <div class="feature-body">
+            <div class="nozzle-art" aria-hidden="true"></div>
+            <ul><li>Verstellbare Duschdüse</li><li>Individuelle Wassertemperatur</li><li>Einstellbarer Wasserdruck</li><li>Lady-Wash Funktion</li></ul>
+          </div>
+        </article>
+        <article class="feature-card reveal">
+          <h3>Komfort auf Knopfdruck</h3>
+          <div class="feature-body feature-photo">
+            <img src="assets/comfort.png" alt="Dusch-WC mit geöffnetem Sitz und Fernbedienung">
+            <ul><li>Sitzheizung</li><li>Warmlufttrocknung</li><li>Nachtlicht</li><li>Geruchsabsaugung</li></ul>
+          </div>
+        </article>
+        <article class="feature-card reveal">
+          <h3>Modernes Design</h3>
+          <div class="feature-body feature-photo">
+            <img src="assets/avinova-s3.png" alt="Modernes AVINOVA Dusch-WC">
+            <ul><li>Minimalistische Linien</li><li>Soft-Close Deckel</li><li>Nahtlose Keramik</li><li>Fernbedienung & App-Steuerung</li></ul>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="section section-shell audience-section">
-      <div class="section-heading reveal">
-        <h2>Für wen ist AVINOVA gemacht?</h2>
-      </div>
-      <div class="audience-grid">
-        <article class="audience-card reveal"><span class="audience-number">01</span><div class="audience-art family"></div><h3>Familien</h3><p>Mehr Selbstständigkeit, Sauberkeit und Komfort für jeden Tag.</p></article>
-        <article class="audience-card reveal"><span class="audience-number">02</span><div class="audience-art seniors"></div><h3>Best Ager</h3><p>Intuitive Bedienung und eine spürbare Entlastung im Alltag.</p></article>
-        <article class="audience-card reveal"><span class="audience-number">03</span><div class="audience-art sensitive"></div><h3>Sensible Haut</h3><p>Sanfte Reinigung mit Wasser reduziert Reibung und Irritationen.</p></article>
-        <article class="audience-card reveal"><span class="audience-number">04</span><div class="audience-art design"></div><h3>Designliebhaber</h3><p>Leise Technologie und präzise Formensprache in perfekter Balance.</p></article>
+    <section class="section audience-section">
+      <div class="section-heading reveal"><h2>Für wen ist AVINOVA gemacht?</h2></div>
+      <div class="audience-grid section-shell">
+        <article class="reveal"><div class="audience-photo"><img src="assets/family.png" alt="Familie"><span>♧</span></div><h3>Familien</h3><p>Mehr Hygiene und Komfort für jeden Tag.</p></article>
+        <article class="reveal"><div class="audience-photo"><img src="assets/seniors.png" alt="Senioren"><span>♙</span></div><h3>Senioren</h3><p>Unterstützt eine selbstständige Körperpflege und erleichtert den Alltag.</p></article>
+        <article class="reveal"><div class="audience-photo"><img src="assets/sensitive.png" alt="Frau mit empfindlicher Haut"><span>⌁</span></div><h3>Menschen mit empfindlicher Haut</h3><p>Die sanfte Reinigung mit Wasser kann Hautreizungen durch häufiges Wischen reduzieren.</p></article>
+        <article class="reveal"><div class="audience-photo"><img src="assets/avinova-hero.png" alt="Modernes Badezimmer"><span>◇</span></div><h3>Designliebhaber</h3><p>Technologie und Ästhetik perfekt kombiniert.</p></article>
       </div>
     </section>
 
@@ -180,7 +177,7 @@
       <div><h3>Service</h3><a href="#kontakt">Beratung</a><a href="#">Montagepartner</a><a href="#">Downloads</a></div>
       <div><h3>Versprechen</h3><p>2 Jahre Garantie<br>Premium Support<br>Versandkostenfrei</p></div>
     </div>
-    <div class="footer-bottom section-shell"><span>© 2026 AVINOVA</span><span>Impressum · Datenschutz · AGB</span></div>
+    <div class="footer-bottom section-shell"><span>© 2026 AVINOVA</span><span><a href="pages/impressum.html">Impressum</a> · <a href="pages/datenschutz.html">Datenschutz</a> · <a href="pages/agb.html">AGB</a></span></div>
   </footer>
 </body>
 </html>
