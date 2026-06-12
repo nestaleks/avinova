@@ -41,7 +41,17 @@ button { color: inherit; }
 .header-cta:active { background-color: var(--gold-dark); transform: translateY(0); box-shadow: none; }
 .menu-toggle, .mobile-nav { display: none; }
 
-.hero { min-height: 585px; display: flex; align-items: center; overflow: hidden; background: linear-gradient(90deg, rgba(251,250,248,.98) 0%, rgba(251,250,248,.94) 40%, rgba(251,250,248,.25) 62%, rgba(251,250,248,0) 72%), url("assets/avinova-hero.png") 68% center/cover no-repeat; }
+.hero { --hero-image: url("assets/avinova-hero.png"); align-items: center; }
+.hero,
+.product-hero { position: relative; isolation: isolate; min-height: 700px; display: flex; overflow: hidden; background: white; }
+.hero::before,
+.product-hero::before,
+.hero::after,
+.product-hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.hero::before,
+.product-hero::before { z-index: -2; background: var(--hero-image) 68% center/cover no-repeat; }
+.hero::after,
+.product-hero::after { z-index: -1; background: linear-gradient(90deg, rgba(251,250,248,.98) 0%, rgba(251,250,248,.94) 48%, rgba(251,250,248,.35) 70%, rgba(251,250,248,0) 86%); }
 .hero-copy { width: min(1180px, calc(100% - 48px)); margin-inline: auto; padding: 54px 0 60px; }
 .hero-brand { display: inline-block; font-size: 46px; line-height: 1; }
 .hero h1, h2, .product-title { font-family: var(--display); font-weight: 400; letter-spacing: -.035em; }
@@ -127,13 +137,21 @@ button { color: inherit; }
 .compact-rating small { display: block; color: #586270; letter-spacing: 0; margin-top: 1px; font-size: 9px; }
 .review-carousel { border-top: 1px solid var(--line); }
 .review-viewport { overflow: hidden; }
-.quotes { display: flex; transition: transform .55s ease; }
-.review-card { flex: 0 0 100%; min-width: 0; margin: 0; padding: 25px 0; display: grid; grid-template-columns: 92px 1fr; gap: 22px; align-items: center; background: transparent; border-bottom: 1px solid var(--line); }
-.review-card img { width: 92px; height: 92px; border-radius: 50%; object-fit: cover; }
-.review-content { min-width: 0; }
-.review-card p { font-family: var(--display); font-size: 16px; line-height: 1.42; margin: 7px 0 12px; }
-.review-card footer { font-size: 8px; color: #66707c; text-transform: uppercase; letter-spacing: .08em; }
-.review-controls { display: flex; justify-content: flex-end; align-items: center; gap: 13px; padding-top: 16px; }
+.quotes { position: relative; min-height: 470px; }
+.review-card { position: absolute; top: 50%; left: 50%; width: 94%; min-width: 0; margin: 0; padding: 25px 22px; display: grid; grid-template-columns: 92px minmax(0, 1fr); grid-template-rows: 92px auto; column-gap: 22px; row-gap: 18px; align-items: stretch; background: #f6f2ec; border: 1px solid rgba(10,27,52,.1); box-shadow: 0 14px 30px rgba(10,27,52,.08); opacity: 0; visibility: hidden; pointer-events: none; transform: translate(-50%, -50%) scale(.72); transition: transform .55s ease, opacity .4s ease, visibility .55s; }
+.review-card::after { content: ""; position: absolute; inset: 0; background: rgba(117,91,53,.16); opacity: 0; pointer-events: none; transition: opacity .45s ease; }
+.review-card.is-current { z-index: 3; opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+.review-card.is-previous,
+.review-card.is-next { z-index: 1; width: 82%; opacity: .72; visibility: visible; transform: translate(-50%, -135%) scale(.82); }
+.review-card.is-next { transform: translate(-50%, 35%) scale(.82); }
+.review-card.is-previous::after,
+.review-card.is-next::after { opacity: 1; }
+.review-card img { grid-column: 1; grid-row: 1; width: 92px; height: 92px; border-radius: 50%; object-fit: cover; }
+.review-content { display: contents; }
+.review-card .stars { grid-column: 2; grid-row: 1; align-self: start; }
+.review-card p { grid-column: 1 / -1; grid-row: 2; font-family: var(--display); font-size: 16px; line-height: 1.42; margin: 0; }
+.review-card footer { grid-column: 2; grid-row: 1; align-self: end; font-size: 8px; color: #66707c; text-transform: uppercase; letter-spacing: .08em; }
+.review-controls { display: flex; justify-content: center; align-items: center; gap: 13px; padding-top: 16px; }
 .review-arrow { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); font-size: 16px; cursor: pointer; transition: color .2s, background .2s; }
 .review-arrow:hover, .review-arrow:focus-visible { color: white; background: var(--ink); }
 .review-position { min-width: 48px; color: #66707c; font-size: 10px; text-align: center; letter-spacing: .08em; }
@@ -173,20 +191,27 @@ button { color: inherit; }
 .footer-bottom > span:last-child { display: flex; flex-wrap: wrap; justify-content: flex-end; margin-inline: -15px; row-gap: 10px; }
 .footer-bottom a { padding: 0 15px; white-space: nowrap; }
 
+.back-to-top { position: fixed; right: 24px; bottom: 24px; z-index: 45; width: 52px; height: 52px; display: grid; place-items: center; padding: 0; border: 1px solid var(--gold); border-radius: 50%; color: white; background: var(--ink); box-shadow: 0 10px 28px rgba(0,0,0,.24), 0 0 0 3px rgba(255,255,255,.72); font-size: 23px; line-height: 1; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .25s, visibility .25s, transform .25s, background .2s, color .2s; }
+.back-to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover, .back-to-top:focus-visible { color: var(--ink); background: var(--gold); outline: none; }
+.back-to-top:active { transform: translateY(2px); }
+
 .reveal { opacity: 1; transform: translateY(22px); transition: transform .7s ease; }
 .reveal.visible { transform: none; }
 
 /* Product pages */
 .inner-page { background: white; }
-.model-s1 { --gold: #8aa4ac; }
-.model-s2 { --gold: #c9954d; }
-.model-s3 { --gold: #8f969d; }
+.model-s1 { --gold: #8aa4ac; --hero-image: url("assets/img/products/model-1/interior-07.png"); }
+.model-s2 { --gold: #c9954d; --hero-image: url("assets/img/products/model-2/interior-07.png"); }
+.model-s3 { --gold: #8f969d; --hero-image: url("assets/img/products/model-3/interior-07.png"); }
 .back-button { min-height: 42px; padding-inline: 20px; }
-.product-hero { min-height: 585px; display: flex; align-items: stretch; background: linear-gradient(90deg, rgba(251,250,248,.98) 0%, rgba(251,250,248,.94) 40%, rgba(251,250,248,.25) 62%, rgba(251,250,248,0) 72%), url("assets/avinova-hero.png") 68% center/cover no-repeat; }
+.product-hero { align-items: stretch; }
 .product-hero-copy { width: min(1180px, calc(100% - 48px)); margin-inline: auto; padding: 54px 0 70px; display: flex; flex-direction: column; align-items: flex-start; }
 .product-hero-brand { display: inline-block; font-size: 46px; line-height: 1; }
 .product-hero .back-button { margin-top: 24px; }
-.product-title { margin: auto 0 0; max-width: 560px; font-size: clamp(64px, 8vw, 112px); line-height: .9; }
+.product-hero-heading { margin-top: auto; max-width: 680px; }
+.product-title { margin: 0; max-width: 560px; font-size: clamp(64px, 8vw, 112px); line-height: .9; }
+.product-hero-heading p { max-width: 600px; margin: 24px 0 0; color: #465363; font-size: 16px; line-height: 1.55; }
 .spec-strip { background: var(--ink); color: white; }
 .spec-strip-inner { display: grid; grid-template-columns: repeat(4,1fr); padding: 56px 0; }
 .spec-strip div { padding: 15px; border-right: 1px solid rgba(255,255,255,.15); }
@@ -194,7 +219,6 @@ button { color: inherit; }
 .spec-strip small { display: block; color: #8f9aab; text-transform: uppercase; letter-spacing: .1em; }
 .spec-strip strong { font-family: var(--display); font-size: 20px; font-weight: 400; }
 .product-story { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.model-s3 .product-hero { background-image: linear-gradient(90deg, rgba(251,250,248,.98) 0%, rgba(251,250,248,.94) 40%, rgba(251,250,248,.25) 62%, rgba(251,250,248,0) 72%), url("assets/avinova-s3.png"); background-position: center, 68% center; background-size: auto, cover; background-repeat: no-repeat; }
 .product-gallery { min-width: 0; }
 .gallery-viewport { position: relative; overflow: hidden; background: #e7e1d8; }
 .gallery-track { display: flex; transition: transform .5s cubic-bezier(.22,.61,.36,1); }
@@ -278,10 +302,17 @@ button { color: inherit; }
   .mobile-nav > a:first-child { border-top: 1px solid var(--line); }
   .mobile-actions { margin-top: auto; display: grid; gap: 12px; padding-top: 28px; }
   .mobile-actions .button { width: 100%; min-height: 50px; font-family: var(--body); }
-  .hero { min-height: 780px; align-items: stretch; background: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.98) 38%,rgba(255,255,255,.15) 65%),url("assets/avinova-hero.png") 65% top/auto 480px no-repeat; }
+  .hero,
+  .product-hero { min-height: 700px; align-items: stretch; }
+  .hero::before,
+  .product-hero::before { inset: 0 0 auto; height: 540px; background-position: 65% top; background-size: auto 540px; }
+  .hero::after,
+  .product-hero::after { inset: 90px 0 auto; height: 450px; }
+  .hero::after { background: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.98) 14%,rgba(255,255,255,.5) 28%,rgba(255,255,255,.06) 42%,rgba(255,255,255,0) 65%); }
+  .product-hero::after { background: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.92) 8%,rgba(255,255,255,.25) 19%,rgba(255,255,255,.03) 30%,rgba(255,255,255,0) 52%); }
   .hero-copy { width: calc(100% - 32px); padding: 28px 0 55px; }
   .hero-brand { font-size: 30px; }
-  .hero h1 { margin-top: 430px; }
+  .hero h1 { margin-top: 490px; }
   .hero h1 { font-size: clamp(34px, 8.1vw, 48px); }
   .hero-lead { font-size: 15px; }
   .button-row .button { flex: 1; min-width: 155px; padding-inline: 12px; }
@@ -295,8 +326,11 @@ button { color: inherit; }
   .review-faq-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .review-faq-grid { gap: 0; }
   .review-panel { border-right: 0; border-bottom: 1px solid var(--line); }
-  .review-panel, .faq-panel { padding: 34px 24px; }
-  .review-card { grid-template-columns: 74px 1fr; gap: 16px; }
+  .review-panel, .faq-panel { padding: 16px; }
+  .quotes { min-height: 430px; }
+  .review-card { width: 94%; grid-template-columns: 74px minmax(0, 1fr); grid-template-rows: 74px auto; column-gap: 16px; row-gap: 16px; padding: 21px 18px; }
+  .review-card.is-previous { width: 84%; transform: translate(-50%, -138%) scale(.8); }
+  .review-card.is-next { width: 84%; transform: translate(-50%, 38%) scale(.8); }
   .review-card img { width: 74px; height: 74px; }
   .review-card p { font-size: 14px; }
   .contact-form { padding: 24px 20px; grid-template-columns: 1fr; }
@@ -306,11 +340,9 @@ button { color: inherit; }
   .footer-bottom { flex-direction: column; gap: 12px; }
   .footer-bottom > span:last-child { width: 100%; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-inline: 0; }
   .footer-bottom a { white-space: normal; }
-  .product-hero { min-height: 780px; background: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.98) 38%,rgba(255,255,255,.15) 65%),url("assets/avinova-hero.png") 65% top/auto 500px no-repeat; }
-  .model-s3 .product-hero { background-image: linear-gradient(0deg,#fff 0%,rgba(255,255,255,.98) 38%,rgba(255,255,255,.15) 65%),url("assets/avinova-s3.png"); background-position: center, 65% top; background-size: auto, auto 500px; }
   .product-hero-copy { width: calc(100% - 32px); padding: 28px 0 55px; }
   .product-hero-brand { font-size: 30px; }
-  .product-title { margin-top: 430px; }
+  .product-hero-heading { margin-top: 400px; }
   .spec-strip-inner { grid-template-columns: 1fr 1fr; gap: 24px 0; }
   .spec-strip div:nth-child(2),
   .spec-strip div:nth-child(4) { border: 0; }
@@ -322,9 +354,9 @@ button { color: inherit; }
 
 @media (max-width: 430px) {
   .section-shell { width: calc(100% - 28px); }
-  .hero { min-height: 780px; }
+  .hero { min-height: 700px; }
   .hero-copy { padding-top: 28px; }
-  .hero h1 { margin-top: 430px; }
+  .hero h1 { margin-top: 470px; }
   .hero h1 { font-size: 34px; }
   .button-row { display: grid; }
   .benefits { width: calc(100% - 28px); }
@@ -337,14 +369,24 @@ button { color: inherit; }
   .gallery-prev { left: 12px; }
   .gallery-next { right: 12px; }
   .product-title { font-size: clamp(52px, 16vw, 76px); }
+  .product-hero-heading p { margin-top: 18px; font-size: 14px; }
   .product-buy .button { width: min(100%, 340px); }
 }
 
+@media (max-width: 768px) {
+  .hero::before,
+  .product-hero::before { background-position: center top; background-size: max(100%, 810px) auto; }
+  .hero-copy { width: 100%; margin-inline: 0; padding-inline: 16px; }
+}
+
 @media (max-width: 600px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 48px; height: 48px; }
   .hero .button-row { display: grid; grid-template-columns: 1fr; }
   .hero .button { width: 100%; min-width: 0; }
   .product-title { font-size: clamp(48px, 13vw, 66px); }
   .product-buy .button { width: min(100%, 340px); }
+  .review-card { grid-template-columns: 64px minmax(0, 1fr); grid-template-rows: 64px auto; column-gap: 14px; }
+  .review-card img { grid-column: 1; grid-row: 1; width: 64px; height: 64px; }
   .feature-section .section-heading h2,
   .audience-section .section-heading h2 { font-size: 19px; overflow-wrap: anywhere; }
   .feature-body { grid-template-columns: 105px minmax(0, 1fr); gap: 12px; }
@@ -358,6 +400,11 @@ button { color: inherit; }
   .benefits article:first-child::before { content: none; }
   .benefits .line-icon { width: 36px; height: 36px; margin-bottom: 14px; }
   .benefits p { max-width: 320px; }
+}
+
+@media (max-width: 499px) {
+  .hero::before,
+  .product-hero::before { background-position: calc(50% - 120px) top; }
 }
 
 @media (prefers-reduced-motion: reduce) {
