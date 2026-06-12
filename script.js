@@ -93,39 +93,27 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
 });
 
 document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
-  const track = carousel.querySelector(".quotes");
   const slides = [...carousel.querySelectorAll(".review-card")];
   const previousButton = carousel.querySelector(".review-prev");
   const nextButton = carousel.querySelector(".review-next");
   const currentPosition = carousel.querySelector(".review-position strong");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let currentIndex = 0;
-  let isTransitioning = false;
   let autoplayTimer;
-  let touchStartX = 0;
-
-  const firstClone = slides[0].cloneNode(true);
-  const lastClone = slides[slides.length - 1].cloneNode(true);
-  firstClone.setAttribute("aria-hidden", "true");
-  lastClone.setAttribute("aria-hidden", "true");
-  track.append(firstClone);
-  track.prepend(lastClone);
-
-  const setTrackPosition = (animate = true) => {
-    track.style.transition = animate ? "" : "none";
-    track.style.transform = `translateX(-${(currentIndex + 1) * 100}%)`;
-    currentPosition.textContent = String((currentIndex + slides.length) % slides.length + 1);
-    if (!animate) {
-      track.getBoundingClientRect();
-      track.style.transition = "";
-    }
-  };
+  let touchStartY = 0;
 
   const showReview = (index) => {
-    if (isTransitioning) return;
-    isTransitioning = true;
-    currentIndex = index;
-    setTrackPosition();
+    currentIndex = (index + slides.length) % slides.length;
+    const previousIndex = (currentIndex - 1 + slides.length) % slides.length;
+    const nextIndex = (currentIndex + 1) % slides.length;
+
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-previous", slideIndex === previousIndex);
+      slide.classList.toggle("is-current", slideIndex === currentIndex);
+      slide.classList.toggle("is-next", slideIndex === nextIndex);
+      slide.setAttribute("aria-hidden", slideIndex === currentIndex ? "false" : "true");
+    });
+    currentPosition.textContent = String(currentIndex + 1);
   };
 
   const stopAutoplay = () => window.clearInterval(autoplayTimer);
@@ -149,27 +137,17 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
     if (!carousel.contains(event.relatedTarget)) startAutoplay();
   });
   carousel.addEventListener("touchstart", (event) => {
-    touchStartX = event.changedTouches[0].clientX;
+    touchStartY = event.changedTouches[0].clientY;
     stopAutoplay();
   }, { passive: true });
   carousel.addEventListener("touchend", (event) => {
-    const distance = event.changedTouches[0].clientX - touchStartX;
+    const distance = event.changedTouches[0].clientY - touchStartY;
     if (Math.abs(distance) > 45) showReview(currentIndex + (distance < 0 ? 1 : -1));
     startAutoplay();
   }, { passive: true });
-  track.addEventListener("transitionend", () => {
-    isTransitioning = false;
-    if (currentIndex === slides.length) {
-      currentIndex = 0;
-      setTrackPosition(false);
-    } else if (currentIndex === -1) {
-      currentIndex = slides.length - 1;
-      setTrackPosition(false);
-    }
-  });
   document.addEventListener("visibilitychange", startAutoplay);
 
-  setTrackPosition(false);
+  showReview(0);
   startAutoplay();
 });
 
@@ -183,3 +161,21 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
+
+const backToTopButton = document.createElement("button");
+backToTopButton.type = "button";
+backToTopButton.className = "back-to-top";
+backToTopButton.setAttribute("aria-label", "Nach oben");
+backToTopButton.innerHTML = '<span aria-hidden="true">↑</span>';
+document.body.append(backToTopButton);
+
+const updateBackToTopVisibility = () => {
+  backToTopButton.classList.toggle("is-visible", window.scrollY > 500);
+};
+
+backToTopButton.addEventListener("click", () => {
+  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  window.scrollTo({ top: 0, behavior });
+});
+window.addEventListener("scroll", updateBackToTopVisibility, { passive: true });
+updateBackToTopVisibility();
