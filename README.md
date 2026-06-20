@@ -46,7 +46,6 @@ avinova/
 ├── pages/
 │   ├── model1.html        # Страница модели AVINOVA S1
 │   ├── model2.html        # Страница модели AVINOVA S2
-│   ├── model3.html        # Страница модели AVINOVA S3
 │   ├── impressum.html
 │   ├── datenschutz.html
 │   └── agb.html
@@ -60,7 +59,6 @@ avinova/
 - `index.html` — презентация бренда, моделей, функций, отзывов и FAQ;
 - `pages/model1.html` — характеристики базовой модели S1 Essential;
 - `pages/model2.html` — характеристики модели S2 Comfort;
-- `pages/model3.html` — характеристики премиальной модели S3.
 
 ## Примечание
 
