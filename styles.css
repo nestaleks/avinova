@@ -229,6 +229,11 @@ button { color: inherit; }
 .product-feature-list article { border-top: 1px solid var(--line); padding-top: 14px; }
 .product-feature-list h3 { font-family: var(--display); font-weight: 400; margin: 0 0 4px; }
 .product-feature-list p { font-size: 11px; color: #68717d; margin: 0; }
+.product-manual { padding-top: 0; }
+.product-manual-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 36px; align-items: center; padding: 42px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.product-manual h2 { max-width: 620px; margin: 0 0 12px; font-size: clamp(32px,4vw,52px); }
+.product-manual p { max-width: 760px; margin: 0; color: #647080; }
+.product-manual .button { white-space: nowrap; }
 .product-buy { background: #e7e1d8; text-align: center; padding: 90px 20px; }
 .product-buy h2 { font-size: clamp(38px,5vw,62px); margin: 0 0 8px; }
 .product-buy .price { font-size: 45px; margin: 20px 0; }
@@ -346,6 +351,8 @@ button { color: inherit; }
   .spec-strip div:nth-child(2),
   .spec-strip div:nth-child(4) { border: 0; }
   .product-story { grid-template-columns: 1fr; gap: 35px; }
+  .product-manual-inner { grid-template-columns: 1fr; gap: 26px; padding: 34px 0; }
+  .product-manual .button { width: min(100%, 340px); }
   .gallery-slide img { height: 440px; }
   .legal-page { padding-top: 0; }
   .legal-card { padding: 30px 22px; }
