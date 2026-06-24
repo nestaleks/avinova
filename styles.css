@@ -241,6 +241,9 @@ button { color: inherit; }
 
 /* Legal pages */
 .legal-body { background: #f5f4f1; }
+.page-top { width: min(1180px, calc(100% - 48px)); margin-inline: auto; padding: 54px 0 20px; display: flex; flex-direction: column; align-items: flex-start; }
+.page-brand { display: inline-block; font-size: 46px; line-height: 1; }
+.page-top .back-button { margin-top: 24px; }
 .legal-page { padding: 20px 0 90px; }
 .legal-card { max-width: 920px; padding: clamp(32px, 5vw, 70px); background: white; border: 1px solid var(--line); box-shadow: var(--shadow); }
 .legal-card h1 { margin: 0 0 42px; font-family: var(--display); font-size: clamp(44px, 7vw, 76px); font-weight: 400; letter-spacing: -.04em; }
@@ -346,6 +349,8 @@ button { color: inherit; }
   .footer-bottom a { white-space: normal; }
   .product-hero-copy { width: calc(100% - 32px); padding: 28px 0 55px; }
   .product-hero-brand { font-size: 30px; }
+  .page-top { width: calc(100% - 32px); padding: 28px 0 24px; }
+  .page-brand { font-size: 30px; }
   .product-hero-heading { margin-top: 400px; }
   .spec-strip-inner { grid-template-columns: 1fr 1fr; gap: 24px 0; }
   .spec-strip div:nth-child(2),
